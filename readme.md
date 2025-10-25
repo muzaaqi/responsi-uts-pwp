@@ -65,7 +65,8 @@ Aplikasi akan berjalan pada http://127.0.0.1:5000/ secara default (mode debug ak
 git clone https://github.com/muzaaqi/responsi-uts-pwp
 cd responsi-uts-pwp
 code . # Buka project di Visual Studio Code
-cursor . # Buka 
+cursor . # Buka project di Cursor
+explorer . # Buka project di Explorer
 ```
 
 2. Menarik (pull) perubahan dari remote ke branch aktif:
