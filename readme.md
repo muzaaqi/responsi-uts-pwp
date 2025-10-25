@@ -62,7 +62,7 @@ Aplikasi akan berjalan pada http://127.0.0.1:5000/ secara default (mode debug ak
 1. Clone repository (jika belum punya salinan lokal):
 
 ```powershell
-git clone [<URL_REPOSITORY>](https://github.com/muzaaqi/responsi-uts-pwp)
+git clone https://github.com/muzaaqi/responsi-uts-pwp
 cd responsi-uts-pwp
 ```
 
