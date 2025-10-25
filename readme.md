@@ -104,7 +104,3 @@ Catatan keamanan: jangan pernah commit file yang berisi password atau kredensial
 - Error koneksi MySQL: periksa `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, dan `MYSQL_DB` pada `.env`.
 - Modul tidak ditemukan: pastikan dependency terinstall (`pip install -r requirements.txt`) dan virtualenv aktif.
 - Port 5000 sudah dipakai: matikan proses yang memakai port tersebut atau ubah port di `app.run(port=xxxx)`.
-
-## Penutup
-
-Jika Anda ingin saya tambahkan perintah untuk menjalankan migrasi, seed data, atau contoh file `.gitignore`, beri tahu saya dan saya akan menambahkannya.
