@@ -64,6 +64,8 @@ Aplikasi akan berjalan pada http://127.0.0.1:5000/ secara default (mode debug ak
 ```powershell
 git clone https://github.com/muzaaqi/responsi-uts-pwp
 cd responsi-uts-pwp
+code . # Buka project di Visual Studio Code
+cursor . # Buka 
 ```
 
 2. Menarik (pull) perubahan dari remote ke branch aktif:
