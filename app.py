@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 load_dotenv()
@@ -14,6 +15,7 @@ app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
 
@@ -26,28 +28,73 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    cur = mysql.connection.cursor()
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
+        email = request.form.get('email', '').strip().lower()
+        password_input = request.form.get('password', '')
 
-        if not email or not password:
-            return render_template('login.html', message="All fields are required.")
-        
-        query = "SELECT * FROM users WHERE email=%s AND password=%s"
-        cur.execute(query, (email, password))
-        user = cur.fetchone()
+        if not email or not password_input:
+            return render_template('login.html', message="Semua field wajib diisi.")
 
-        if user:
+        cur = mysql.connection.cursor()
+        try:
+            cur.execute("SELECT id, name, email, password FROM users WHERE email=%s", (email,))
+            user = cur.fetchone()
+        finally:
+            cur.close()
+
+        if not user:
+            return render_template('login.html', message="Email atau password salah.")
+
+        if check_password_hash(user['password'], password_input):
             session['is_logged_in'] = True
-            session['user_id'] = user[0]
-            session['name'] = user[1]
-            session['email'] = user[2]
+            session['user_id'] = user['id']
+            session['name'] = user['name']
+            session['email'] = user['email']
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', message="Invalid email or password.")
-    
+            return render_template('login.html', message="Email atau password salah.")
+
     return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '')
+        confirm = request.form.get('confirm_password', '')
+
+        if not all([name, email, password, confirm]):
+            return render_template('register.html', message="Semua field wajib diisi.")
+        if password != confirm:
+            return render_template('register.html', message="Konfirmasi password tidak sama.")
+
+        cur = mysql.connection.cursor()
+        try:
+            cur.execute("SELECT id FROM users WHERE email=%s", (email,))
+            if cur.fetchone():
+                return render_template('register.html', message="Email sudah terdaftar.")
+
+            pwd_hash = generate_password_hash(password)
+            cur.execute(
+                "INSERT INTO users (name, email, password) VALUES (%s, %s, %s)",
+                (name, email, pwd_hash)
+            )
+            mysql.connection.commit()
+
+            # Auto-login setelah registrasi (opsional)
+            cur.execute("SELECT id, name, email FROM users WHERE email=%s", (email,))
+            user = cur.fetchone()
+        finally:
+            cur.close()
+
+        session['is_logged_in'] = True
+        session['user_id'] = user[0] if isinstance(user, tuple) else user['id']
+        session['name'] = user[1] if isinstance(user, tuple) else user['name']
+        session['email'] = user[2] if isinstance(user, tuple) else user['email']
+        return redirect(url_for('index'))
+
+    return render_template('register.html')
 
 @app.route('/logout')
 def logout():
