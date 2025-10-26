@@ -3,10 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0B63C6",
+              accent: "#FFC857",
+              gray: {
+                50: "#F8FAFC",
+                100: "#F1F5F9",
+                200: "#E2E8F0",
+                300: "#CBD5E1",
+                400: "#94A3B8",
+                500: "#64748B",
+                600: "#475569",
+                700: "#334155",
+                800: "#1E293B",
+                900: "#0F172A",
+              },
+            },
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 0.8s ease-out",
+              "slide-up": "slideUp 0.8s ease-out",
+              float: "float 6s ease-in-out infinite",
+              glow: "glow 2s ease-in-out infinite alternate",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { opacity: "0", transform: "translateY(30px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              glow: {
+                "0%": { boxShadow: "0 0 20px rgba(11, 99, 198, 0.3)" },
+                "100%": { boxShadow: "0 0 30px rgba(11, 99, 198, 0.6)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
     {% block head %}{% endblock %}
   </head>
-  <body>
+  <body class="font-inter bg-gray-50 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav
+      class="bg-white/80 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-100"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <div class="flex items-center">
+            <div class="text-2xl md:text-3xl font-bold text-gradient">
+              ALSyntax
+            </div>
+          </div>
+          <div class="hidden md:flex items-center space-x-10">
+            <a
+              href="/#about"
+              class="text-gray-600 hover:text-primary transition-all duration-300 font-medium"
+              >Tentang</a
+            >
+            <a
+              href="/#courses"
+              class="text-gray-600 hover:text-primary transition-all duration-300 font-medium"
+              >Kelas</a
+            >
+            <a
+              href="/#testimoni"
+              class="text-gray-600 hover:text-primary transition-all duration-300 font-medium"
+              >Testimoni</a
+            >
+
+            {% if user %}
+            <div id="user-info" class="flex items-center space-x-4" onclick="showLogoutButton()">
+              <div class="flex flex-col items-end justify-end">
+                <span class="font-semibold text-lg">{{ user[0] }}</span>
+                <span class="text-sm text-zinc-500">{{ user[1] }}</span>
+              </div>
+              <img
+                src="{{ url_for('static', filename='images/default_avatar.svg') }}"
+                alt="profile picture"
+                class="w-10 h-10 rounded-full"
+              />
+              <a href="/logout">
+                <button
+                  id="logout-button"
+                  class="hidden bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600 transition-all duration-300 font-medium"
+                >
+                  Logout
+                </button>
+              </a>
+            </div>
+            {% else %}
+            <div class="flex items-center space-x-4">
+              <a href="/login">
+                <button
+                  class="text-primary hover:text-blue-700 transition-all duration-300 font-medium px-6 py-3 rounded-xl hover:bg-primary/10"
+                >
+                  <b>Masuk</b>
+                </button>
+              </a>
+              <button
+                class="bg-primary text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
+              >
+                Registrasi
+              </button>
+            </div>
+            {% endif %}
+          </div>
+          <div class="md:hidden">
+            <button
+              id="mobile-menu-button"
+              class="text-gray-600 hover:text-primary transition-colors p-2"
+            >
+              <svg
+                id="menu-icon"
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+              <svg
+                id="close-icon"
+                class="w-6 h-6 hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden hidden bg-white/95 backdrop-blur-md border-t border-gray-100"
+      >
+        <div class="px-4 py-6 space-y-4">
+          <a
+            href="#about"
+            class="block text-gray-600 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+            >Tentang</a
+          >
+          <a
+            href="#courses"
+            class="block text-gray-600 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+            >Kelas</a
+          >
+          <a
+            href="#testimoni"
+            class="block text-gray-600 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+            >Testimoni</a
+          >
+          <div class="flex gap-3">
+            <button
+              class="flex-1 text-primary border border-primary px-6 py-3 rounded-xl hover:bg-primary/10 transition-all duration-300 font-medium"
+            >
+              Masuk
+            </button>
+            <button
+              class="flex-1 bg-primary text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg font-medium"
+            >
+              Registrasi
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
     {% block body %}{% endblock %}
+    <script>
+      function showLogoutButton() {
+        const logoutButton = document.getElementById("logout-button");
+        logoutButton.classList.toggle("hidden");
+      }
+    </script>
   </body>
 </html>

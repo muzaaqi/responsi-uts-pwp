@@ -1,0 +1,625 @@
+{% extends 'layout.html' %} 
+
+{% block head %}
+<style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0B63C6, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+<title>WOLF COURSE</title>
+{% endblock %}
+
+{% block body %}
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 overflow-hidden pt-32 pb-10">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="text-center lg:text-left animate-slide-up order-1 lg:order-1">
+                    <div class="inline-flex items-center px-3 sm:px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-xs sm:text-sm mb-6 sm:mb-8">
+                        🚀 Platform Coding #1 di Indonesia
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-6 sm:mb-8 leading-tight">
+                        Belajar Coding dari Nol dengan 
+                        <span class="text-gradient">ALSyntax</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-12 leading-relaxed font-light">
+                        Project nyata, harga terjangkau, berbahasa Indonesia
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+                        <button class="group bg-primary text-white px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-2xl hover:shadow-primary/25 hover:scale-105 animate-glow">
+                            <span class="flex items-center justify-center">
+                                Daftar Sekarang
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="group border-2 border-primary text-primary px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="hidden sm:inline">Coba Gratis 1 Modul</span>
+                                <span class="sm:hidden">Coba Gratis</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-center lg:justify-end animate-fade-in order-2 lg:order-2 mb-8 lg:mb-0">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary to-blue-600 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
+                        <svg class="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[500px] lg:h-[500px]" viewBox="0 0 500 500" fill="none">
+                            <!-- Main Laptop -->
+                            <g class="animate-float">
+                                <rect x="100" y="200" width="300" height="180" rx="12" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+                                <rect x="110" y="210" width="280" height="160" rx="8" fill="#0F172A"/>
+                                <rect x="120" y="220" width="260" height="120" fill="url(#screenGradient)"/>
+                                
+                                <!-- Code Editor Interface -->
+                                <rect x="130" y="230" width="240" height="20" fill="#374151" rx="4"/>
+                                <circle cx="140" cy="240" r="3" fill="#EF4444"/>
+                                <circle cx="150" cy="240" r="3" fill="#F59E0B"/>
+                                <circle cx="160" cy="240" r="3" fill="#10B981"/>
+                                
+                                <!-- Code Lines with Animation -->
+                                <g class="animate-pulse">
+                                    <rect x="130" y="260" width="80" height="3" fill="#FFC857" rx="2"/>
+                                    <rect x="220" y="260" width="60" height="3" fill="#10B981" rx="2"/>
+                                    <rect x="130" y="270" width="100" height="3" fill="#3B82F6" rx="2"/>
+                                    <rect x="240" y="270" width="40" height="3" fill="#EF4444" rx="2"/>
+                                    <rect x="130" y="280" width="120" height="3" fill="#8B5CF6" rx="2"/>
+                                    <rect x="130" y="290" width="90" height="3" fill="#06B6D4" rx="2"/>
+                                    <rect x="130" y="300" width="110" height="3" fill="#F59E0B" rx="2"/>
+                                    <rect x="130" y="310" width="70" height="3" fill="#EC4899" rx="2"/>
+                                </g>
+                                
+                                <!-- Laptop Base -->
+                                <ellipse cx="250" cy="380" rx="160" ry="15" fill="#374151"/>
+                                <rect x="90" y="375" width="320" height="25" rx="12" fill="#475569"/>
+                            </g>
+                            
+                            <!-- Floating Elements -->
+                            <g class="animate-float" style="animation-delay: -1s;">
+                                <circle cx="80" cy="120" r="25" fill="url(#accentGradient)" opacity="0.8"/>
+                                <text x="80" y="128" text-anchor="middle" fill="white" font-size="16" font-weight="bold">{ }</text>
+                            </g>
+                            
+                            <g class="animate-float" style="animation-delay: -2s;">
+                                <rect x="380" y="100" width="50" height="50" rx="10" fill="url(#primaryGradient)" opacity="0.8"/>
+                                <text x="405" y="130" text-anchor="middle" fill="white" font-size="20" font-weight="bold">AI</text>
+                            </g>
+                            
+                            <g class="animate-float" style="animation-delay: -0.5s;">
+                                <polygon points="420,300 440,280 460,300 440,320" fill="url(#greenGradient)" opacity="0.8"/>
+                                <text x="440" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="bold">✓</text>
+                            </g>
+                            
+                            <g class="animate-float" style="animation-delay: -1.5s;">
+                                <rect x="50" y="350" width="40" height="40" rx="8" fill="url(#purpleGradient)" opacity="0.8"/>
+                                <text x="70" y="375" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Py</text>
+                            </g>
+                            
+                            <!-- Gradients -->
+                            <defs>
+                                <linearGradient id="screenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0B63C6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0B63C6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FFC857;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-6">
+                    💡 Tentang Kami
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">Mengapa Memilih ALSyntax?</h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+                    Platform kursus online coding berbasis project yang dirancang khusus untuk pemula. 
+                    Belajar dengan bahasa Indonesia, mentor berpengalaman, dan project nyata yang siap untuk portfolio.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group text-center p-8 rounded-2xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Web Development</h3>
+                    <p class="text-gray-600 font-light">Frontend & Backend</p>
+                </div>
+                <div class="group text-center p-8 rounded-2xl hover:bg-gradient-to-br hover:from-yellow-50 hover:to-orange-50 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-20 h-20 bg-gradient-to-br from-accent to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Python Programming</h3>
+                    <p class="text-gray-600 font-light">Dari Dasar hingga Advanced</p>
+                </div>
+                <div class="group text-center p-8 rounded-2xl hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Science</h3>
+                    <p class="text-gray-600 font-light">Analytics & Visualization</p>
+                </div>
+                <div class="group text-center p-8 rounded-2xl hover:bg-gradient-to-br hover:from-purple-50 hover:to-violet-50 transition-all duration-300 hover:shadow-xl">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">AI & Machine Learning</h3>
+                    <p class="text-gray-600 font-light">Future Technology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-32 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-6">
+                    ⭐ Keunggulan Kami
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">Mengapa ALSyntax Berbeda?</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Bahasa Indonesia</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">Materi pembelajaran dalam bahasa Indonesia yang mudah dipahami untuk pemula tanpa hambatan bahasa.</p>
+                </div>
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-orange-500 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Akses 24/7</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">Belajar kapan saja dan dimana saja sesuai dengan jadwal dan kecepatan belajar Anda sendiri.</p>
+                </div>
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Sertifikat Resmi</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">Dapatkan sertifikat resmi yang diakui industri setelah menyelesaikan setiap kursus dengan baik.</p>
+                </div>
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Project Nyata</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">Kerjakan project nyata yang bisa langsung masuk ke portfolio dan meningkatkan peluang karir Anda.</p>
+                </div>
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Mentor Interaktif</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">Bimbingan langsung dari mentor berpengalaman di industri teknologi dengan track record terbukti.</p>
+                </div>
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Harga Terjangkau</h3>
+                    <p class="text-gray-600 leading-relaxed font-light">Investasi terbaik untuk masa depan karir Anda dengan harga yang sangat terjangkau dan fleksibel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Preview Section -->
+    <section id="courses" class="py-32 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-6">
+                    🎓 Kelas Terpopuler
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">Pilih Kelas Sesuai Minatmu</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light">Mulai perjalanan coding Anda dengan kelas-kelas berkualitas tinggi yang dirancang untuk pemula</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100">
+                    <div class="h-64 bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <svg class="w-20 h-20 mx-auto mb-4 opacity-90" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"/>
+                                </svg>
+                                <div class="text-sm font-medium opacity-80">12 Minggu • 48 Modul</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium">
+                            Populer
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Python Dasar</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed font-light">Pelajari dasar-dasar pemrograman Python dari nol hingga bisa membuat aplikasi sederhana dengan project nyata.</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">Rp 299K</span>
+                                <span class="text-gray-400 line-through ml-2">Rp 499K</span>
+                            </div>
+                            <div class="text-sm text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">
+                                40% OFF
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105">
+                            Daftar Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100">
+                    <div class="h-64 bg-gradient-to-br from-green-500 via-emerald-600 to-teal-700 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <svg class="w-20 h-20 mx-auto mb-4 opacity-90" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                </svg>
+                                <div class="text-sm font-medium opacity-80">16 Minggu • 64 Modul</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium">
+                            Terlaris
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Web Development</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed font-light">Belajar HTML, CSS, JavaScript dan framework modern untuk membuat website profesional yang responsif.</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">Rp 499K</span>
+                                <span class="text-gray-400 line-through ml-2">Rp 799K</span>
+                            </div>
+                            <div class="text-sm text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">
+                                38% OFF
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105">
+                            Daftar Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100">
+                    <div class="h-64 bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-700 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <svg class="w-20 h-20 mx-auto mb-4 opacity-90" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                                </svg>
+                                <div class="text-sm font-medium opacity-80">20 Minggu • 80 Modul</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium">
+                            Premium
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Data Science</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed font-light">Analisis data, visualisasi, dan machine learning menggunakan Python dan tools populer di industri.</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">Rp 699K</span>
+                                <span class="text-gray-400 line-through ml-2">Rp 1.2JT</span>
+                            </div>
+                            <div class="text-sm text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full">
+                                42% OFF
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105">
+                            Daftar Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni Section -->
+    <section id="testimoni" class="py-32 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-6">
+                    💬 Testimoni
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">Apa Kata Mereka?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light">Ribuan siswa telah berhasil mengubah karir mereka bersama ALSyntax</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl mr-6 shadow-lg">
+                            AR
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Andi Rahmawan</h4>
+                            <p class="text-gray-600 font-light">Web Developer di Tokopedia</p>
+                            <div class="flex text-yellow-400 mt-2">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed font-light text-lg">"Materi sangat mudah dipahami dan mentor sangat responsif. Dalam 6 bulan saya sudah bekerja sebagai web developer di perusahaan unicorn!"</p>
+                </div>
+                
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent to-orange-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl mr-6 shadow-lg">
+                            SP
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Sari Permata</h4>
+                            <p class="text-gray-600 font-light">Data Analyst di Gojek</p>
+                            <div class="flex text-yellow-400 mt-2">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed font-light text-lg">"Project-based learning di ALSyntax sangat membantu. Portfolio saya jadi kuat dan mudah dapat kerja impian!"</p>
+                </div>
+                
+                <div class="group bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/20">
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl mr-6 shadow-lg">
+                            BW
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Budi Wijaya</h4>
+                            <p class="text-gray-600 font-light">ML Engineer di Bukalapak</p>
+                            <div class="flex text-yellow-400 mt-2">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed font-light text-lg">"Dari nol coding sampai bisa bikin aplikasi AI. Sekarang gaji saya naik 300%! Terima kasih ALSyntax!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 bg-gradient-to-br from-primary via-blue-600 to-indigo-700 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div class="max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium text-sm mb-8">
+                🚀 Mulai Sekarang
+            </div>
+            <h2 class="text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+                Mulai Belajar Coding Hari Ini
+            </h2>
+            <p class="text-xl lg:text-2xl text-blue-100 mb-12 leading-relaxed font-light max-w-3xl mx-auto">
+                Bergabung dengan ribuan siswa yang telah mengubah karir mereka bersama ALSyntax. Investasi terbaik untuk masa depan Anda!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="group bg-accent text-gray-900 px-12 py-5 rounded-2xl text-xl font-bold hover:bg-yellow-400 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105">
+                    <span class="flex items-center justify-center">
+                        Daftar Sekarang
+                        <svg class="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </span>
+                </button>
+                <button class="group border-2 border-white text-white px-12 py-5 rounded-2xl text-xl font-bold hover:bg-white hover:text-primary transition-all duration-300 shadow-lg">
+                    <span class="flex items-center justify-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Konsultasi Gratis
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="col-span-2">
+                    <div class="text-3xl font-bold text-gradient mb-6">ALSyntax</div>
+                    <p class="text-gray-300 mb-8 leading-relaxed font-light text-lg max-w-md">Platform kursus online coding terbaik untuk pemula. Belajar dengan bahasa Indonesia, project nyata, dan mentor berpengalaman.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="group w-12 h-12 bg-primary rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110">
+                            <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="group w-12 h-12 bg-primary rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110">
+                            <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="group w-12 h-12 bg-primary rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110">
+                            <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.051 3.999a9.053 9.053 0 11-9.053 9.053c0-4.99 4.063-9.053 9.053-9.053z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-white">Kelas Populer</h3>
+                    <ul class="space-y-4 text-gray-300 font-light">
+                        <li><a href="#" class="hover:text-white transition-colors hover:translate-x-1 transform duration-200 block">Python Dasar</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors hover:translate-x-1 transform duration-200 block">Web Development</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors hover:translate-x-1 transform duration-200 block">Data Science</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors hover:translate-x-1 transform duration-200 block">Machine Learning</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors hover:translate-x-1 transform duration-200 block">Mobile Development</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-6 text-white">Hubungi Kami</h3>
+                    <ul class="space-y-4 text-gray-300 font-light">
+                        <li class="flex items-center">
+                            <span class="text-2xl mr-3">📱</span>
+                            <div>
+                                <div class="font-medium text-white">WhatsApp</div>
+                                <div>+62 858-7604-9654</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-2xl mr-3">📧</span>
+                            <div>
+                                <div class="font-medium text-white">Email</div>
+                                <div>info@alsyntax.com</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-2xl mr-3">📷</span>
+                            <div>
+                                <div class="font-medium text-white">Instagram</div>
+                                <div>@_alimunif</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center">
+                <p class="text-gray-400 font-light">&copy; 2025 ALSyntax. All rights reserved. Made with ❤️ for Indonesian developers.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add click functionality to CTA buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Daftar')) {
+                    alert('🎉 Terima kasih! Fitur pendaftaran akan segera tersedia. Silakan hubungi kami melalui WhatsApp untuk informasi lebih lanjut dan dapatkan early bird discount 50%!');
+                } else if (this.textContent.includes('Coba Gratis')) {
+                    alert('🚀 Modul gratis akan segera tersedia! Ikuti media sosial kami untuk update terbaru dan akses eksklusif.');
+                } else if (this.textContent.includes('Konsultasi')) {
+                    alert('💬 Konsultasi gratis tersedia! Hubungi kami di WhatsApp untuk diskusi langsung dengan mentor berpengalaman.');
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for scroll animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9712552fb65d0548',t:'MTc1NTUyOTc3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+{% endblock %}
