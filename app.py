@@ -23,11 +23,13 @@ mysql = MySQL(app)
 def index():
     user = None
     if session.get('is_logged_in'):
-        user = [session['name'], session['email']]
+        user = {'name': session.get('name'), 'email': session.get('email')}
     return render_template('index.html', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if session.get('is_logged_in'):
+        return redirect(url_for('index'))
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         password_input = request.form.get('password', '')
@@ -59,6 +61,8 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if session.get('is_logged_in'):
+        return redirect(url_for('index'))
     if request.method == 'POST':
         name = request.form.get('name', '').strip()
         email = request.form.get('email', '').strip().lower()
