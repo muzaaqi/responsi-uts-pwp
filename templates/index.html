@@ -310,9 +310,16 @@
                                 40% OFF
                             </div>
                         </div>
-                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105">
-                            Daftar Sekarang
-                        </button>
+                        <a href="{% if user %} /register-python-dasar {% endif %}">
+                            <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 {% if user %}cursor-pointer{% else %}cursor-not-allowed disabled{% endif %}">
+                                {% if user %}
+                                    Daftar Sekarang
+                                {% endif %}
+                                {% if not user %}
+                                    Masuk untuk Daftar
+                                {% endif %}
+                            </button>
+                        </a>
                     </div>
                 </div>
                 
@@ -343,9 +350,16 @@
                                 38% OFF
                             </div>
                         </div>
-                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105">
-                            Daftar Sekarang
-                        </button>
+                        <a href="{% if user %} /register-web-development {% endif %}">
+                            <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 {% if user %}cursor-pointer{% else %}cursor-not-allowed disabled{% endif %}">
+                                {% if user %}
+                                    Daftar Sekarang
+                                {% endif %}
+                                {% if not user %}
+                                    Masuk untuk Daftar
+                                {% endif %}
+                            </button>
+                        </a>
                     </div>
                 </div>
                 
@@ -376,9 +390,16 @@
                                 42% OFF
                             </div>
                         </div>
-                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105">
-                            Daftar Sekarang
+                        <a href="{% if user %} /register-data-science {% endif %}">
+                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 {% if user %}cursor-pointer{% else %}cursor-not-allowed disabled{% endif %}">
+                            {% if user %}
+                                Daftar Sekarang
+                            {% endif %}
+                            {% if not user %}
+                                Masuk untuk Daftar
+                            {% endif %}
                         </button>
+                        </a>
                     </div>
                 </div>
             </div>
