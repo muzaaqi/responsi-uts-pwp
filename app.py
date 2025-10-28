@@ -96,6 +96,37 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/member-register/<kelas>', methods=['GET', 'POST'])
+def member_register(kelas):
+    if not session.get('is_logged_in'):
+        return redirect(url_for('login'))
+
+    class_name = kelas.replace('-', ' ').title()
+
+    user = {
+        'name': session.get('name'),
+        'email': session.get('email'),
+        'id': session.get('user_id')
+    }
+
+    if request.method == 'POST':
+        phone = request.form.get('phone')
+        address = request.form.get('address')
+
+        cur = mysql.connection.cursor()
+        cur.execute(
+            "INSERT INTO members (user_id, class_name, phone, address) VALUES (%s, %s, %s, %s)",
+            (user['id'], class_name, phone, address)
+        )
+        mysql.connection.commit()
+        cur.close()
+
+        return render_template('member-register.html', class_name=class_name, user=user,
+                               message="Pendaftaran berhasil!")
+
+    return render_template('member-register.html', class_name=class_name, user=user)
+
+
 @app.route('/logout')
 def logout():
     if 'is_logged_in' in session:
