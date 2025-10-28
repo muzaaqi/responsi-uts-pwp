@@ -37,7 +37,7 @@ def login():
 
         cur = mysql.connection.cursor()
         try:
-            cur.execute("SELECT id, name, email, password FROM users WHERE email=%s", (email,))
+            cur.execute("SELECT id, name, email, password, member FROM users WHERE email=%s", (email,))
             user = cur.fetchone()
         finally:
             cur.close()
@@ -50,6 +50,7 @@ def login():
             session['user_id'] = user['id']
             session['name'] = user['name']
             session['email'] = user['email']
+            session['member'] = user['member']
             return redirect(url_for('index'))
         else:
             return render_template('login.html', message="Email atau password salah.")
@@ -92,13 +93,14 @@ def register():
         session['user_id'] = user[0] if isinstance(user, tuple) else user['id']
         session['name'] = user[1] if isinstance(user, tuple) else user['name']
         session['email'] = user[2] if isinstance(user, tuple) else user['email']
+        session['member'] = 0
         return redirect(url_for('index'))
 
     return render_template('register.html')
 
 @app.route('/member-register/<kelas>', methods=['GET', 'POST'])
 def member_register(kelas):
-    if not session.get('is_logged_in'):
+    if not session.get('is_logged_in') or session.get('member') == 0:
         return redirect(url_for('login'))
 
     class_name = kelas.replace('-', ' ').title()
@@ -122,6 +124,8 @@ def member_register(kelas):
         )
         mysql.connection.commit()
         cur.close()
+        
+        session['member'] = 1
 
         return render_template('member-register.html', class_name=class_name, user=user, message="Pendaftaran berhasil!")
 
