@@ -310,13 +310,13 @@
                                 40% OFF
                             </div>
                         </div>
-                        <a href="{% if user %} /member-register/python-dasar {% endif %}">
-                            <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 {% if user %}cursor-pointer{% else %}cursor-not-allowed{% endif %}" {% if not user %}disabled{% endif %}>
+                        <a href="{% if user %} /member-register/python-dasar {% else %} /login {% endif %}">
+                            <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
                                 {% if user %}
                                     Daftar Sekarang
                                 {% endif %}
                                 {% if not user %}
-                                    Masuk untuk Daftar
+                                    Login untuk mendaftar
                                 {% endif %}
                             </button>
                         </a>
@@ -350,13 +350,13 @@
                                 38% OFF
                             </div>
                         </div>
-                        <a href="{% if user %} /member-register/web-development {% endif %}">
-                            <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 {% if user %}cursor-pointer{% else %}cursor-not-allowed{% endif %}" {% if not user %}disabled{% endif %}>
+                        <a href="{% if user %} /member-register/web-development {% else %} /login {% endif %}">
+                            <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
                                 {% if user %}
                                     Daftar Sekarang
                                 {% endif %}
                                 {% if not user %}
-                                    Masuk untuk Daftar
+                                    Login untuk mendaftar
                                 {% endif %}
                             </button>
                         </a>
@@ -390,13 +390,13 @@
                                 42% OFF
                             </div>
                         </div>
-                        <a href="{% if user %} /member-register/data-science {% endif %}">
-                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 {% if user %}cursor-pointer{% else %}cursor-not-allowed{% endif %}" {% if not user %}disabled{% endif %}>
+                        <a href="{% if user %} /member-register/data-science {% else %} /login {% endif %}">
+                        <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
                             {% if user %}
                                 Daftar Sekarang
                             {% endif %}
                             {% if not user %}
-                                Masuk untuk Daftar
+                                Login untuk mendaftar
                             {% endif %}
                         </button>
                         </a>
