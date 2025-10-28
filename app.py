@@ -121,8 +121,7 @@ def member_register(kelas):
         mysql.connection.commit()
         cur.close()
 
-        return render_template('member-register.html', class_name=class_name, user=user,
-                               message="Pendaftaran berhasil!")
+        return render_template('member-register.html', class_name=class_name, user=user, message="Pendaftaran berhasil!")
 
     return render_template('member-register.html', class_name=class_name, user=user)
 
