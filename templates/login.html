@@ -1,44 +1,77 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} {% block head %}
+<title>Login</title>
+<script
+  src="https://kit.fontawesome.com/a076d05399.js"
+  crossorigin="anonymous"
+></script>
+{% endblock %} {% block body %}
+<div class="min-h-screen flex items-center justify-center mt-16">
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <h2 class="text-3xl font-bold mb-6 text-center text-primary">Login Akun</h2>
 
-{% block head %}
-  <title>Login</title>
-{% endblock %}
+    {% if message %}
+    <div class="mb-4 text-red-500 text-center font-semibold">{{ message }}</div>
+    {% endif %}
 
-{% block body %}
-  <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-      <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
-      {% if message %}
-        <div class="mb-4 text-red-500 text-center">{{ message }}</div>
-      {% endif %}
-      <form method="POST" action="{{ url_for('login') }}">
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2" for="email">Email</label>
-          <input
-            class="w-full px-3 py-2 border rounded"
-            type="email"
-            id="email"
-            name="email"
-            required
-          />
-        </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 mb-2" for="password">Password</label>
-          <input
-            class="w-full px-3 py-2 border rounded"
-            type="password"
-            id="password"
-            name="password"
-            required
-          />
-        </div>
-        <button
-          class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-          type="submit"
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="mb-4 relative">
+        <label class="block text-gray-700 mb-2" for="email">Email</label>
+        <input
+          class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-400 focus:outline-none transition"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@mail.com"
+          required
+        />
+        <i
+          class="fa-solid fa-envelope absolute right-3 top-9 text-gray-400"
+        ></i>
+      </div>
+
+      <div class="mb-6 relative">
+        <label class="block text-gray-700 mb-2" for="password">Password</label>
+        <input
+          class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-400 focus:outline-none transition"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          required
+        />
+        <i
+          id="togglePassword"
+          class="fa-solid fa-eye absolute right-3 top-9 text-gray-400 cursor-pointer"
+        ></i>
+      </div>
+
+      <button
+        class="w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary transition duration-300 font-semibold"
+        type="submit"
+      >
+        Login
+      </button>
+
+      <p class="text-center text-gray-600 mt-4 text-sm">
+        Belum punya akun?
+        <a href="{{ url_for('register') }}" class="text-primary hover:underline"
+          >Daftar di sini</a
         >
-          Login
-        </button>
-      </form>
-    </div>
+      </p>
+    </form>
   </div>
+</div>
+
+<script>
+  // Toggle Password
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+  togglePassword.addEventListener("click", () => {
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+    togglePassword.classList.toggle("fa-eye");
+    togglePassword.classList.toggle("fa-eye-slash");
+  });
+</script>
 {% endblock %}
