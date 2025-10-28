@@ -197,22 +197,22 @@
           {% if user%}
           <div
             id="user-info"
-            class="flex items-center space-x-4 cursor-pointer hover:bg-zinc-200/40 p-2 rounded-md"
-            onclick="showLogoutButton()"
+            class="flex items-center justify-between space-x-4 cursor-pointer p-2 rounded-md"
           >
-            <div class="flex flex-col items-end justify-end">
-              <span class="font-medium text-lg">{{ user['name'] }}</span>
-              <span class="text-sm text-zinc-500">{{ user['email'] }}</span>
+            <div class="flex flex-row items-center space-x-4">
+              <img
+                src="{{ url_for('static', filename='images/default_avatar.svg') }}"
+                alt="profile picture"
+                class="w-10 h-10 rounded-full"
+              />
+              <div class="flex flex-col">
+                <span class="font-medium text-lg">{{ user['name'] }}</span>
+                <span class="text-sm text-zinc-500">{{ user['email'] }}</span>
+              </div>
             </div>
-            <img
-              src="{{ url_for('static', filename='images/default_avatar.svg') }}"
-              alt="profile picture"
-              class="w-10 h-10 rounded-full"
-            />
             <a href="/logout">
               <button
-                id="logout-button"
-                class="hidden bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600 transition-all duration-300 font-medium"
+                class="bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600 transition-all duration-300 font-medium"
               >
                 Logout
               </button>
