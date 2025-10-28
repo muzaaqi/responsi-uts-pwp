@@ -587,19 +587,6 @@
             });
         });
 
-        // Add click functionality to CTA buttons
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.textContent.includes('Daftar')) {
-                    alert('🎉 Terima kasih! Fitur pendaftaran akan segera tersedia. Silakan hubungi kami melalui WhatsApp untuk informasi lebih lanjut dan dapatkan early bird discount 50%!');
-                } else if (this.textContent.includes('Coba Gratis')) {
-                    alert('🚀 Modul gratis akan segera tersedia! Ikuti media sosial kami untuk update terbaru dan akses eksklusif.');
-                } else if (this.textContent.includes('Konsultasi')) {
-                    alert('💬 Konsultasi gratis tersedia! Hubungi kami di WhatsApp untuk diskusi langsung dengan mentor berpengalaman.');
-                }
-            });
-        });
-
         // Add scroll animations
         const observerOptions = {
             threshold: 0.1,
