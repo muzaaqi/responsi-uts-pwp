@@ -110,13 +110,15 @@ def member_register(kelas):
     }
 
     if request.method == 'POST':
-        phone = request.form.get('phone')
-        address = request.form.get('address')
+        # phone = request.form.get('phone')
+        # address = request.form.get('address')
+        user_id = session['user_id']
 
         cur = mysql.connection.cursor()
         cur.execute(
-            "INSERT INTO members (user_id, class_name, phone, address) VALUES (%s, %s, %s, %s)",
-            (user['id'], class_name, phone, address)
+            "UPDATE users SET member = %s WHERE id = %s", (1, user_id)
+            # "INSERT INTO members (user_id, class_name, phone, address) VALUES (%s, %s, %s, %s)",
+            # (user['id'], class_name, phone, address)
         )
         mysql.connection.commit()
         cur.close()
