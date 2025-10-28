@@ -100,8 +100,10 @@ def register():
 
 @app.route('/member-register/<kelas>', methods=['GET', 'POST'])
 def member_register(kelas):
-    if not session.get('is_logged_in') or session.get('member') == 0:
+    if not session.get('is_logged_in'):
         return redirect(url_for('login'))
+    if session.get('member') == 1:
+        return redirect(url_for('index'))
 
     class_name = kelas.replace('-', ' ').title()
 
