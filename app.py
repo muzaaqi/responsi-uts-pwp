@@ -161,6 +161,12 @@ def member_register(kelas):
 def my_courses():
     if not session.get('is_logged_in'):
         return redirect(url_for('login'))
+    
+    user = {
+        'name': session.get('name'),
+        'email': session.get('email'),
+        'id': session.get('user_id')
+    }
 
     user_id = session['user_id']
     cur = mysql.connection.cursor()
@@ -178,7 +184,7 @@ def my_courses():
         if member_data.get('data-science') == 1:
             classes.append("Data Science")
 
-    return render_template('my-courses.html', classes=classes)
+    return render_template('my-courses.html', classes=classes, user=user)
 
 @app.route('/my-courses/<course>')
 def my_course(course):
