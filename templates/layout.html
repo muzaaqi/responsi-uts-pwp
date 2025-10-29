@@ -92,7 +92,7 @@
               >Testimoni</a
             >
             <a
-              href="{% if user.member == 1 %} /my-courses {% else %} /#courses {% endif %}"
+              href="{% if not user %} /#courses {% elif user.member == 1 %} /my-courses {% else %} /#courses {% endif %}"
               class="text-gray-600 hover:text-primary transition-all duration-300 font-medium"
               >Kelas Saya</a
             >
