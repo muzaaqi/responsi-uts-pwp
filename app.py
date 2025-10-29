@@ -104,10 +104,9 @@ def register():
 
 @app.route('/member-register/<kelas>', methods=['GET', 'POST'])
 def member_register(kelas):
+    cur = mysql.connection.cursor()
     if not session.get('is_logged_in'):
         return redirect(url_for('login'))
-    if session.get('member') == 1:
-        return redirect(url_for('index'))
 
     class_name = kelas.replace('-', ' ').title()
 
@@ -118,16 +117,33 @@ def member_register(kelas):
     }
 
     if request.method == 'POST':
-        # phone = request.form.get('phone')
-        # address = request.form.get('address')
+        phone = request.form.get('phone')
+        address = request.form.get('address')
         user_id = session['user_id']
-
-        cur = mysql.connection.cursor()
+        
+        if session.get('member') == 1:
+            if kelas == 'python-dasar':
+                cur.execute("UPDATE members SET python_dasar = %s WHERE user_id = %s", (1, user['id']))
+            elif kelas == 'web-development':
+                cur.execute("UPDATE members SET web_development = %s WHERE user_id = %s", (1, user['id']))
+            elif kelas == 'data-science':
+                cur.execute("UPDATE members SET data_science = %s WHERE user_id = %s", (1, user['id']))
+            else:
+                return render_template('member-register.html', user=user, message="Kelas tidak ditemukan")
+        else:
+            if kelas == 'python-dasar':
+                cur.execute("INSERT INTO members (id, python_dasar) VALUES (%s, %s)", (user['id'], 1))
+            elif kelas == 'web-development':
+                cur.execute("INSERT INTO members (id, web_development) VALUES (%s, %s)", (user['id'], 1))
+            elif kelas == 'data-science':
+                cur.execute("INSERT INTO members (id, data_science) VALUES (%s, %s)", (user['id'], 1))
+            else:
+                return render_template('member-register.html', user=user, message="Kelas tidak ditemukan")
+        
         cur.execute(
-            "UPDATE users SET member = %s WHERE id = %s", (1, user_id)
-            # "INSERT INTO members (user_id, class_name, phone, address) VALUES (%s, %s, %s, %s)",
-            # (user['id'], class_name, phone, address)
+            "UPDATE users SET phone = %s, address = %s, member = %s WHERE id = %s", (phone, address, 1, user_id)
         )
+        
         mysql.connection.commit()
         cur.close()
         
