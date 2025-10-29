@@ -1,37 +1,195 @@
-{% extends 'layout.html' %} {% block head %}
-<title>Kelas Saya</title>
-{% endblock %} {% block body %}
-<div class="max-w-6xl mx-auto mt-32 px-6">
-  <h1 class="text-3xl font-bold text-primary mb-6">Kelas Saya</h1>
+{% extends 'layout.html' %} 
 
-  {% if classes %}
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {% for kelas in classes %}
-    <div
-      class="bg-white shadow-lg rounded-lg border hover:shadow-xl overflow-hidden"
-    >
-      <!-- Gambar -->
-      <img
-        src="{{ url_for('static', filename='images/' ~ kelas.image) }}"
-        alt="{{ kelas.name }}"
-        class="w-full h-63 object-cover"
-      />
+{% block head %}
+<title>Kelas Saya - WOLF COURSE</title>
+{% endblock %} 
 
-      <!-- Isi Card -->
-      <div class="p-6">
-        <h2 class="text-xl font-semibold mb-4">{{ kelas.name }}</h2>
-        <a
-          href="/my-courses/{{ kelas.name | lower | replace(' ', '-') }}"
-          class="block text-center bg-primary text-white py-2 rounded hover:bg-blue-700"
-        >
-          Masuk Kelas
-        </a>
-      </div>
+{% block body %}
+<!-- Hero Section -->
+<section class="relative min-h-[40vh] flex items-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 overflow-hidden pt-32 pb-16">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse" style="animation-delay: -3s;"></div>
     </div>
-    {% endfor %}
-  </div>
-  {% else %}
-  <p class="text-gray-600 text-lg">Kamu belum mendaftar kelas apapun.</p>
-  {% endif %}
-</div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="text-center">
+            <div class="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-6">
+                📚 Dashboard Belajar
+            </div>
+            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                Kelas <span class="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">Saya</span>
+            </h1>
+            <p class="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto font-light">
+                Lanjutkan perjalanan belajar coding Anda dan raih impian karir di dunia teknologi
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-20 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if classes %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for kelas in classes %}
+            <div class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-gray-100">
+                <div class="relative h-64 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br {% if 'python' in kelas.name.lower() %}from-blue-500/20 to-indigo-600/20{% elif 'web' in kelas.name.lower() %}from-green-500/20 to-emerald-600/20{% elif 'data' in kelas.name.lower() %}from-purple-500/20 to-violet-600/20{% else %}from-primary/20 to-blue-600/20{% endif %} z-10"></div>
+                    
+                    <img 
+                        src="{{ url_for('static', filename='images/' ~ kelas.image) }}" 
+                        alt="{{ kelas.name }}"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                    />
+                    
+                    <div class="absolute top-4 left-4 z-20">
+                        <div class="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                            <span class="text-sm font-semibold {% if 'python' in kelas.name.lower() %}text-blue-600{% elif 'web' in kelas.name.lower() %}text-green-600{% elif 'data' in kelas.name.lower() %}text-purple-600{% else %}text-primary{% endif %}">
+                                Sedang Belajar
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Module Count Badge -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <div class="bg-white/90 backdrop-blur-sm px-3 py-2 rounded-xl shadow-lg flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card Content -->
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300">
+                        {{ kelas.name }}
+                    </h2>
+                    
+                    <!-- Quick Stats -->
+                    <div class="flex items-center justify-between mb-6 pb-6 border-b border-gray-100">
+                        <div class="flex items-center space-x-2 text-gray-600">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                            </svg>
+                            <span class="text-sm font-medium">Akses Selamanya</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-600">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                            </svg>
+                            <span class="text-sm font-medium">Sertifikat</span>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <a href="/my-courses/{{ kelas.name | lower | replace(' ', '-') }}" class="block">
+                        <button class="w-full group/btn bg-gradient-to-r {% if 'python' in kelas.name.lower() %}from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800{% elif 'web' in kelas.name.lower() %}from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800{% elif 'data' in kelas.name.lower() %}from-purple-600 to-violet-700 hover:from-purple-700 hover:to-violet-800{% else %}from-primary to-blue-700 hover:from-blue-700 hover:to-blue-800{% endif %} text-white py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 relative overflow-hidden">
+                            <span class="relative z-10 flex items-center justify-center">
+                                Lanjutkan Belajar
+                                <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </span>
+                            <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform origin-left duration-300"></div>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% else %}
+        <!-- Empty State -->
+        <div class="max-w-2xl mx-auto text-center py-20">
+            <div class="relative inline-block mb-8">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
+                <div class="relative w-32 h-32 mx-auto bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center">
+                    <svg class="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Belum Ada Kelas</h2>
+            <p class="text-xl text-gray-600 mb-8 font-light leading-relaxed">
+                Kamu belum mendaftar kelas apapun. Yuk mulai perjalanan coding-mu sekarang!
+            </p>
+            
+            <a href="/#courses">
+                <button class="group bg-gradient-to-r from-primary to-blue-600 text-white px-10 py-5 rounded-2xl text-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-2xl hover:shadow-primary/25 hover:scale-105 inline-flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Pilih Kelas
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Stats Section (Optional - hanya muncul jika ada kelas) -->
+{% if classes %}
+<section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 text-center transform hover:-translate-y-2 transition-all duration-300">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-900 mb-2">{{ classes|length }}</h3>
+                <p class="text-gray-600 font-medium">Kelas Aktif</p>
+            </div>
+            
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20 text-center transform hover:-translate-y-2 transition-all duration-300">
+                <div class="w-16 h-16 bg-gradient-to-br from-accent to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-900 mb-2">{{ classes|length }}</h3>
+                <p class="text-gray-600 font-medium">Sertifikat Tersedia</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-br from-primary via-blue-600 to-indigo-700 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/10"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+    <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium text-sm mb-6">
+            🎯 Tingkatkan Skill
+        </div>
+        <h2 class="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Siap Tambah Kelas Baru?
+        </h2>
+        <p class="text-lg lg:text-xl text-blue-100 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
+            Eksplorasi lebih banyak kelas dan perluas skill coding Anda untuk membuka peluang karir yang lebih besar!
+        </p>
+        <a href="/#courses">
+            <button class="group bg-accent text-gray-900 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-yellow-400 transition-all duration-300 shadow-2xl hover:shadow-accent/25 hover:scale-105 inline-flex items-center">
+                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                Jelajahi Kelas Lain
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+            </button>
+        </a>
+    </div>
+</section>
+
 {% endblock %}
