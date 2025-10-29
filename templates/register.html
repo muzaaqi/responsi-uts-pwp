@@ -2,12 +2,7 @@
 
 {% block head %}
   <title>Register</title>
-  <!-- Font Awesome 7.0.1 -->
-  <link rel="stylesheet" 
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" 
-  integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
-  crossorigin="anonymous" 
-  referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block body %}
@@ -20,7 +15,6 @@
       {% endif %}
 
       <form method="POST" action="{{ url_for('register') }}">
-        <!-- Nama -->
         <div class="mb-4 relative">
           <label class="block text-gray-700 mb-2" for="name">Nama Lengkap</label>
           <input
@@ -31,10 +25,9 @@
             placeholder="Masukkan nama lengkap"
             required
           />
-          <i class="fa-solid fa-user absolute right-3 top-11 text-gray-400"></i>
+          <i class="fa-solid fa-user absolute right-3 top-9 text-gray-400"></i>
         </div>
 
-        <!-- Email -->
         <div class="mb-4 relative">
           <label class="block text-gray-700 mb-2" for="email">Email</label>
           <input
@@ -45,56 +38,37 @@
             placeholder="example@mail.com"
             required
           />
-          <i class="fa-solid fa-envelope absolute right-3 top-11 text-gray-400 "></i>
+          <i class="fa-solid fa-envelope absolute right-3 top-9 text-gray-400"></i>
         </div>
 
-        <!-- Password -->
         <div class="mb-4 relative">
           <label class="block text-gray-700 mb-2" for="password">Password</label>
-          <div class="relative">
-            <input
-              class="peer w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:outline-none transition"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              required
-            />
-            <button
-              type="button"
-              id="togglePassword"
-              class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-primary focus:outline-none"
-            >
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
+          <input
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:outline-none transition"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+          <i id="togglePassword" class="fa-solid fa-eye absolute right-3 top-9 text-gray-400 cursor-pointer"></i>
         </div>
 
-        <!-- Konfirmasi Password -->
         <div class="mb-6 relative">
           <label class="block text-gray-700 mb-2" for="confirm_password">Konfirmasi Password</label>
-          <div class="relative">
-            <input
-              class="peer w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:outline-none transition"
-              type="password"
-              id="confirm_password"
-              name="confirm_password"
-              placeholder="Konfirmasi password"
-              required
-            />
-            <button
-              type="button"
-              id="toggleConfirm"
-              class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-primary focus:outline-none"
-            >
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
+          <input
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:outline-none transition"
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Konfirmasi password"
+            required
+          />
+          <i id="toggleConfirm" class="fa-solid fa-eye absolute right-3 top-9 text-gray-400 cursor-pointer"></i>
         </div>
 
-        <!-- Tombol -->
         <button
-          class="w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary/90 transition duration-300 font-semibold"
+          class="w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary transition duration-300 font-semibold"
           type="submit"
         >
           Register
@@ -108,25 +82,25 @@
     </div>
   </div>
 
-  <!-- Script show/hide password -->
   <script>
+    // Toggle Password
     const togglePassword = document.getElementById('togglePassword');
-    const toggleConfirm = document.getElementById('toggleConfirm');
     const passwordInput = document.getElementById('password');
-    const confirmInput = document.getElementById('confirm_password');
-
     togglePassword.addEventListener('click', () => {
-      const type = passwordInput.type === 'password' ? 'text' : 'password';
-      passwordInput.type = type;
-      togglePassword.querySelector('i').classList.toggle('fa-eye');
-      togglePassword.querySelector('i').classList.toggle('fa-eye-slash');
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.classList.toggle('fa-eye');
+      togglePassword.classList.toggle('fa-eye-slash');
     });
 
+    // Toggle Confirm Password
+    const toggleConfirm = document.getElementById('toggleConfirm');
+    const confirmInput = document.getElementById('confirm_password');
     toggleConfirm.addEventListener('click', () => {
-      const type = confirmInput.type === 'password' ? 'text' : 'password';
-      confirmInput.type = type;
-      toggleConfirm.querySelector('i').classList.toggle('fa-eye');
-      toggleConfirm.querySelector('i').classList.toggle('fa-eye-slash');
+      const type = confirmInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      confirmInput.setAttribute('type', type);
+      toggleConfirm.classList.toggle('fa-eye');
+      toggleConfirm.classList.toggle('fa-eye-slash');
     });
   </script>
 {% endblock %}
