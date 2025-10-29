@@ -301,7 +301,7 @@
                                 40% OFF
                             </div>
                         </div>
-                        <a href="{% if user.courses.python_dasar %} /my-courses/python-dasar {% elif user %} /my-courses/member-register/python-dasar {% else %} /login {% endif %}">
+                        <a href="{% if not user %} /login {% elif user.courses.python_dasar %} /my-courses/python-dasar {% elif user %} /member-register/python-dasar {% endif %}">
                             <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
                                 {% if not user %}
                                     Login untuk mendaftar
@@ -342,7 +342,7 @@
                                 38% OFF
                             </div>
                         </div>
-                        <a href="{% if user.courses.web_development %} /my-courses/web-development {% elif user %} /my-courses/member-register/web-development {% else %} /login {% endif %}">
+                        <a href="{% if not user %} /login {% elif user.courses.web_development %} /my-courses/web-development {% elif user %} /member-register/web-development {% endif %}">
                             <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
                                 {% if not user %}
                                     Login untuk mendaftar
@@ -383,7 +383,7 @@
                                 42% OFF
                             </div>
                         </div>
-                        <a href="{% if user.courses.data_science %} /my-courses/data-science {% elif user %} /my-courses/member-register/data-science {% else %} /login {% endif %}">
+                        <a href="{% if not user %} /login {% elif user.courses.data_science %} /my-courses/data-science {% elif user %} /member-register/data-science {% endif %}">
                         <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
                             {% if not user %}
                                 Login untuk mendaftar

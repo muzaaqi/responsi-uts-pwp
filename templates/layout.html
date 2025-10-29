@@ -198,6 +198,11 @@
             class="block text-gray-600 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
             >Testimoni</a
           >
+          <a
+            href="{% if not user %} /#courses {% elif user.member == 1 %} /my-courses {% else %} /#courses {% endif %}"
+            class="block text-gray-600 hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-gray-50"
+            >Kelas Saya</a
+          >
           {% if user%}
           <div
             id="user-info"
