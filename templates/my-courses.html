@@ -1,32 +1,27 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-<title>Kelas {{ class_name }}</title>
+<title>Kelas Saya</title>
 {% endblock %}
 
 {% block body %}
-<div class="max-w-6xl mx-auto mt-10 p-6">
-  <!-- Judul Kelas -->
-  <h1 class="text-3xl font-bold text-primary mb-6">Kelas {{ class_name }}</h1>
+<div class="max-w-6xl mx-auto mt-32 px-6">
+  <h1 class="text-3xl font-bold text-primary mb-6">Kelas Saya</h1>
 
-  <!-- Video Player -->
-  <div class="rounded-xl shadow-lg overflow-hidden mb-6">
-    <iframe class="w-full h-[420px]"
-      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-      title="YouTube video player"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-  <!-- Deskripsi Video -->
-  <div class="bg-white p-6 rounded-xl shadow-md">
-    <h2 class="text-2xl font-semibold mb-3">Deskripsi Materi</h2>
-    <p class="text-gray-700 leading-relaxed">
-      Selamat datang di kelas {{ class_name }}! Pada materi pertama ini, Anda akan mempelajari konsep dasar
-      hingga pemahaman fundamental sebelum melangkah ke level berikutnya. Pastikan untuk mengikuti video ini
-      dengan fokus dan praktik langsung agar hasil belajar lebih maksimal.
-    </p>
-  </div>
+  {% if classes %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for class_name in classes %}
+      <div class="bg-white shadow-lg p-6 rounded-lg border hover:shadow-xl">
+        <h2 class="text-xl font-semibold mb-4">{{ class_name }}</h2>
+        <a href="/my-courses/{{ class_name | lower | replace(' ', '-') }}" 
+           class="block text-center bg-primary text-white py-2 rounded hover:bg-blue-700">
+          Masuk Kelas
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-600 text-lg">Kamu belum mendaftar kelas apapun.</p>
+  {% endif %}
 </div>
 {% endblock %}

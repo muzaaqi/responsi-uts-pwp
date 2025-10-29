@@ -158,13 +158,28 @@ def member_register(kelas):
     return render_template('member-register.html', class_name=class_name, user=user)
 
 @app.route('/my-courses')
+@app.route('/my-courses')
 def my_courses():
-    user = {
-        'name': session.get('name'),
-        'email': session.get('email'),
-        'id': session.get('user_id')
-    }
-    return render_template('my-courses.html', user=user)
+    if not session.get('is_logged_in'):
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    cur = mysql.connection.cursor()
+
+    cur.execute(f"SELECT * FROM members WHERE id = %s", (user_id,))
+    member_data = cur.fetchone()
+    cur.close()
+
+    classes = []
+    if member_data:
+        if member_data.get('python_dasar') == 1:
+            classes.append("Python Dasar")
+        if member_data.get('web-development') == 1:
+            classes.append("Web Development")
+        if member_data.get('data-science') == 1:
+            classes.append("Data Science")
+
+    return render_template('my-courses.html', classes=classes)
 
 @app.route('/logout')
 def logout():
