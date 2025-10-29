@@ -196,17 +196,20 @@ def my_courses():
         if member_data.get('python_dasar') == 1:
             classes.append({
                 "name": "Python Dasar",
-                "image": "python.png"
+                "image": "python.png",
+                "modules": 5
             })
         if member_data.get('web_development') == 1:
             classes.append({
                 "name": "Web Development",
-                "image": "webdev.png"
+                "image": "webdev.png",
+                "modules": 4
             })
         if member_data.get('data_science') == 1:
             classes.append({
                 "name": "Data Science",
-                "image": "datasci.png"
+                "image": "datasci.png",
+                "modules": 6
             })
 
     return render_template('my-courses.html', classes=classes, user=user)
@@ -221,11 +224,32 @@ def my_course(course):
         'id': session.get('user_id')
     }
     if course == 'python-dasar':
-        return render_template('python-dasar.html', user=user)
+        modules = [
+            {
+                'title': 'Pengenalan Python',
+                'iframe': 'https://www.youtube.com/embed/fmZX-5r0t5E?si=qaaG9W6HXiMB142X',
+                'description': 'Materi dimulai dari pengenalan konsep dasar Python, karakteristiknya yang mudah dibaca, dan kegunaannya yang serbaguna, dilanjutkan dengan langkah-langkah persiapan lingkungan seperti instalasi Python dan IDE (Visual Studio Code/PyCharm). Pembahasan inti mencakup semua konsep fundamental, mulai dari variabel, tipe data (integer, float, string, boolean), operator, hingga cara menerima input pengguna dan melakukan konversi tipe data. Video ini juga menjelaskan secara rinci alur kontrol program menggunakan if, elif, else, dan match case, serta konsep perulangan (loops) menggunakan for dan while. Lebih lanjut, dibahas tuntas struktur data penting seperti List (bisa diubah), Tuple (tidak bisa diubah), Dictionary (key-value), dan Set (unik). Konsep-konsep penting lainnya seperti pembuatan fungsi (termasuk parameter, return, dan scope), penanganan error (try-except), dan operasi file (File I/O) juga diajarkan. Sebagai penutup, semua teori ini dipraktikkan dengan membangun tiga studi kasus aplikasi sederhana: kalkulator, permainan tebak angka, dan aplikasi ujian sekolah.'
+            }
+        ]
+        return render_template('python-dasar.html', user=user, modules=modules)
     elif course == 'web-development':
-        return render_template('web-development.html', user=user)
+        modules = [
+            {
+                'title': 'Pengenalan Web Development',
+                'iframe': 'https://www.youtube.com/embed/71a2zeC71gk?si=iReslnM5v_42lBw7',
+                'description': 'Video ini menyajikan panduan komprehensif yang dirancang khusus untuk pemula yang ingin menguasai proses pembuatan website secara menyeluruh, dari konsep awal hingga publikasi online. Materi ini kemungkinan besar menguraikan tiga pilar utama pengembangan web front-end: HTML untuk membangun struktur dan kerangka dasar halaman web, CSS untuk memberikan gaya, desain visual, dan tata letak agar website terlihat menarik, serta JavaScript dasar untuk menambahkan fungsionalitas dan interaktivitas bagi pengguna. Berbeda dari tutorial biasa, panduan ini tidak berhenti pada penulisan kode saja, tetapi juga melangkah lebih jauh dengan membahas proses akhir yang krusial, yaitu bagaimana cara mengunggah (hosting) file-file website ke server agar dapat di-publish, sehingga hasil akhirnya dapat diakses secara publik melalui internet.'
+            }
+        ]
+        return render_template('web-development.html', user=user, modules=modules)
     elif course == 'data-science':
-        return render_template('data-science.html', user=user)
+        modules = [
+            {
+                'title': 'Pengenalan Data Science',
+                'iframe': 'https://www.youtube.com/embed/gDZ6czwuQ18?si=2Eu3NH6nDiw2CDXJ',
+                'description': 'Ini adalah panduan komprehensif yang dirancang untuk pemula absolut, mencakup keseluruhan spektrum Data Science dalam satu video maraton. Materi ini kemungkinan besar dimulai dari dasar-dasar Data Science, kemudian beralih ke topik-topik inti seperti berbagai algoritma Machine Learning (termasuk Clustering, Association, dan Ensemble Learning). Video ini tampaknya juga memberikan porsi yang signifikan untuk Deep Learning, membahas konsep-konsep seperti Neural Networks, Perceptrons, Forward Propagation, dan Backpropagation, menjadikannya sumber belajar lengkap dari awal hingga konsep-konsep lanjutan.'
+            }
+        ]
+        return render_template('data-science.html', user=user, modules=modules)
     else:
         return render_template('index.html', user=user)
 
