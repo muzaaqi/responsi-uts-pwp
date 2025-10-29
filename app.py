@@ -59,7 +59,7 @@ def login():
             session['member'] = user['member']
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', message="Email atau password salah.")
+            return render_template('login.html', message="Email atau password salah.", user=None)
 
     return render_template('login.html')
 
@@ -82,7 +82,7 @@ def register():
         try:
             cur.execute("SELECT id FROM users WHERE email=%s", (email,))
             if cur.fetchone():
-                return render_template('register.html', message="Email sudah terdaftar.")
+                return render_template('register.html', message="Email sudah terdaftar.", user=None)
 
             pwd_hash = generate_password_hash(password)
             cur.execute(
@@ -104,7 +104,7 @@ def register():
         session['member'] = 0
         return redirect(url_for('index'))
 
-    return render_template('register.html')
+    return render_template('register.html', user=None)
 
 @app.route('/member-register/<kelas>', methods=['GET', 'POST'])
 def member_register(kelas):
