@@ -158,7 +158,6 @@ def member_register(kelas):
     return render_template('member-register.html', class_name=class_name, user=user)
 
 @app.route('/my-courses')
-@app.route('/my-courses')
 def my_courses():
     if not session.get('is_logged_in'):
         return redirect(url_for('login'))
@@ -180,6 +179,24 @@ def my_courses():
             classes.append("Data Science")
 
     return render_template('my-courses.html', classes=classes)
+
+@app.route('/my-courses/<course>')
+def my_course(course):
+    if not session.get('is_logged_in'):
+        return redirect(url_for('index'))
+    user = {
+        'name': session.get('name'),
+        'email': session.get('email'),
+        'id': session.get('user_id')
+    }
+    if course == 'python-dasar':
+        return render_template('python-dasar.html', user=user)
+    elif course == 'web-development':
+        return render_template('web-development.html', user=user)
+    elif course == 'data-science':
+        return render_template('data-science.html', user=user)
+    else:
+        return render_template('index.html', user=user)
 
 @app.route('/logout')
 def logout():

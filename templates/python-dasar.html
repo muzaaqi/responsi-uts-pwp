@@ -1,0 +1,30 @@
+{% extends 'layout.html' %} {% block head %}
+<title>Kelas Python Dasar</title> {% endblock %} {% block body %}
+<div class="max-w-6xl mx-auto mt-32 p-6">
+  <!-- Judul Kelas -->
+  <h1 class="text-3xl font-bold text-primary mb-6">Kelas Python Dasar</h1>
+  <!-- Video Player -->
+  <div class="rounded-xl shadow-lg overflow-hidden mb-6">
+    <iframe
+      width="100%"
+      height="600"
+      src="https://www.youtube.com/embed/fmZX-5r0t5E?si=qaaG9W6HXiMB142X"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <!-- Deskripsi Video -->
+  <div class="bg-white p-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-semibold mb-3">Deskripsi Materi</h2>
+    <p class="text-gray-700 leading-relaxed">
+      Selamat datang di kelas Python Dasar! Pada materi pertama ini, Anda
+      akan mempelajari konsep dasar hingga pemahaman fundamental sebelum
+      melangkah ke level berikutnya. Pastikan untuk mengikuti video ini dengan
+      fokus dan praktik langsung agar hasil belajar lebih maksimal.
+    </p>
+  </div>
+</div>
+{% endblock %}
