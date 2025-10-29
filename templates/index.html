@@ -303,7 +303,9 @@
                         </div>
                         <a href="{% if user %} /member-register/python-dasar {% else %} /login {% endif %}">
                             <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
-                                {% if user %}
+                                {% if user.courses.python_dasar  %}
+                                    Masuk ke Kelas
+                                {% elif user %}
                                     Daftar Sekarang
                                 {% endif %}
                                 {% if not user %}
@@ -343,7 +345,9 @@
                         </div>
                         <a href="{% if user %} /member-register/web-development {% else %} /login {% endif %}">
                             <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
-                                {% if user %}
+                                {% if user.courses.web_development %}
+                                    Masuk ke Kelas
+                                {% elif user %}
                                     Daftar Sekarang
                                 {% endif %}
                                 {% if not user %}
@@ -383,7 +387,9 @@
                         </div>
                         <a href="{% if user %} /member-register/data-science {% else %} /login {% endif %}">
                         <button class="w-full bg-primary text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105 cursor-pointer">
-                            {% if user %}
+                            {% if user.courses.data_science %}
+                                Masuk ke Kelas
+                            {% elif user %}
                                 Daftar Sekarang
                             {% endif %}
                             {% if not user %}

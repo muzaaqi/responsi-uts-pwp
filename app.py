@@ -21,9 +21,12 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-    user = None
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT python_dasar, web_development, data_science FROM members WHERE id=%s", (session.get('user_id'),))
+    user_data = cur.fetchone()
+    cur.close()
     if session.get('is_logged_in'):
-        user = {'name': session.get('name'), 'email': session.get('email')}
+        user = {'name': session.get('name'), 'email': session.get('email'), 'member': session.get('member'), 'courses': { 'python_dasar': user_data.get('python_dasar'), 'web_development': user_data.get('web_development'), 'data_science': user_data.get('data_science') }}
     return render_template('index.html', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
