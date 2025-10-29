@@ -1,27 +1,37 @@
-{% extends 'layout.html' %}
-
-{% block head %}
+{% extends 'layout.html' %} {% block head %}
 <title>Kelas Saya</title>
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block body %}
 <div class="max-w-6xl mx-auto mt-32 px-6">
   <h1 class="text-3xl font-bold text-primary mb-6">Kelas Saya</h1>
 
   {% if classes %}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for class_name in classes %}
-      <div class="bg-white shadow-lg p-6 rounded-lg border hover:shadow-xl">
-        <h2 class="text-xl font-semibold mb-4">{{ class_name }}</h2>
-        <a href="/my-courses/{{ class_name | lower | replace(' ', '-') }}" 
-           class="block text-center bg-primary text-white py-2 rounded hover:bg-blue-700">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for kelas in classes %}
+    <div
+      class="bg-white shadow-lg rounded-lg border hover:shadow-xl overflow-hidden"
+    >
+      <!-- Gambar -->
+      <img
+        src="{{ url_for('static', filename='images/' ~ kelas.image) }}"
+        alt="{{ kelas.name }}"
+        class="w-full h-63 object-cover"
+      />
+
+      <!-- Isi Card -->
+      <div class="p-6">
+        <h2 class="text-xl font-semibold mb-4">{{ kelas.name }}</h2>
+        <a
+          href="/my-courses/{{ kelas.name | lower | replace(' ', '-') }}"
+          class="block text-center bg-primary text-white py-2 rounded hover:bg-blue-700"
+        >
           Masuk Kelas
         </a>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
+  </div>
   {% else %}
-    <p class="text-gray-600 text-lg">Kamu belum mendaftar kelas apapun.</p>
+  <p class="text-gray-600 text-lg">Kamu belum mendaftar kelas apapun.</p>
   {% endif %}
 </div>
 {% endblock %}

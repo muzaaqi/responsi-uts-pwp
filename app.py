@@ -171,18 +171,27 @@ def my_courses():
     user_id = session['user_id']
     cur = mysql.connection.cursor()
 
-    cur.execute(f"SELECT * FROM members WHERE id = %s", (user_id,))
+    cur.execute("SELECT * FROM members WHERE id = %s", (user_id,))
     member_data = cur.fetchone()
     cur.close()
 
     classes = []
     if member_data:
         if member_data.get('python_dasar') == 1:
-            classes.append("Python Dasar")
-        if member_data.get('web-development') == 1:
-            classes.append("Web Development")
-        if member_data.get('data-science') == 1:
-            classes.append("Data Science")
+            classes.append({
+                "name": "Python Dasar",
+                "image": "python.png"
+            })
+        if member_data.get('web_development') == 1:
+            classes.append({
+                "name": "Web Development",
+                "image": "webdev.png"
+            })
+        if member_data.get('data_science') == 1:
+            classes.append({
+                "name": "Data Science",
+                "image": "datasci.png"
+            })
 
     return render_template('my-courses.html', classes=classes, user=user)
 
