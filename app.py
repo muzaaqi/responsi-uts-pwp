@@ -157,6 +157,14 @@ def member_register(kelas):
 
     return render_template('member-register.html', class_name=class_name, user=user)
 
+@app.route('/my-courses')
+def my_courses():
+    user = {
+        'name': session.get('name'),
+        'email': session.get('email'),
+        'id': session.get('user_id')
+    }
+    return render_template('my-courses.html', user=user)
 
 @app.route('/logout')
 def logout():
