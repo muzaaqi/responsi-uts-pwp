@@ -122,24 +122,24 @@ def member_register(kelas):
     if request.method == 'POST':
         phone = request.form.get('phone')
         address = request.form.get('address')
-        user_id = session['user_id']
+        user_id = session.get('user_id')
         
         if session.get('member') == 1:
             if kelas == 'python-dasar':
-                cur.execute("UPDATE members SET python_dasar = %s WHERE user_id = %s", (1, user['id']))
+                cur.execute("UPDATE members SET python_dasar = %s WHERE id = %s", (1, user_id,))
             elif kelas == 'web-development':
-                cur.execute("UPDATE members SET web_development = %s WHERE user_id = %s", (1, user['id']))
+                cur.execute("UPDATE members SET web_development = %s WHERE id = %s", (1, user_id,))
             elif kelas == 'data-science':
-                cur.execute("UPDATE members SET data_science = %s WHERE user_id = %s", (1, user['id']))
+                cur.execute("UPDATE members SET data_science = %s WHERE id = %s", (1, user_id,))
             else:
                 return render_template('member-register.html', user=user, message="Kelas tidak ditemukan")
         else:
             if kelas == 'python-dasar':
-                cur.execute("INSERT INTO members (id, python_dasar) VALUES (%s, %s)", (user['id'], 1))
+                cur.execute("INSERT INTO members (id, python_dasar) VALUES (%s, %s)", (user_id, 1))
             elif kelas == 'web-development':
-                cur.execute("INSERT INTO members (id, web_development) VALUES (%s, %s)", (user['id'], 1))
+                cur.execute("INSERT INTO members (id, web_development) VALUES (%s, %s)", (user_id, 1))
             elif kelas == 'data-science':
-                cur.execute("INSERT INTO members (id, data_science) VALUES (%s, %s)", (user['id'], 1))
+                cur.execute("INSERT INTO members (id, data_science) VALUES (%s, %s)", (user_id, 1))
             else:
                 return render_template('member-register.html', user=user, message="Kelas tidak ditemukan")
         
