@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<title>Kelas {{ class_name }}</title>
+{% endblock %}
+
+{% block body %}
+<div class="max-w-6xl mx-auto mt-10 p-6">
+  <!-- Judul Kelas -->
+  <h1 class="text-3xl font-bold text-primary mb-6">Kelas {{ class_name }}</h1>
+
+  <!-- Video Player -->
+  <div class="rounded-xl shadow-lg overflow-hidden mb-6">
+    <iframe class="w-full h-[420px]"
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      title="YouTube video player"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- Deskripsi Video -->
+  <div class="bg-white p-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-semibold mb-3">Deskripsi Materi</h2>
+    <p class="text-gray-700 leading-relaxed">
+      Selamat datang di kelas {{ class_name }}! Pada materi pertama ini, Anda akan mempelajari konsep dasar
+      hingga pemahaman fundamental sebelum melangkah ke level berikutnya. Pastikan untuk mengikuti video ini
+      dengan fokus dan praktik langsung agar hasil belajar lebih maksimal.
+    </p>
+  </div>
+</div>
+{% endblock %}
