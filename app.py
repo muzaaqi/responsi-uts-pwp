@@ -39,7 +39,7 @@ def login():
         password_input = request.form.get('password', '')
 
         if not email or not password_input:
-            return render_template('login.html', message="Semua field wajib diisi.")
+            return render_template('login.html', message="Semua field wajib diisi.", usesr=None)
 
         cur = mysql.connection.cursor()
         try:
@@ -49,7 +49,7 @@ def login():
             cur.close()
 
         if not user:
-            return render_template('login.html', message="Email atau password salah.")
+            return render_template('login.html', message="Email atau password salah.", user=None)
 
         if check_password_hash(user['password'], password_input):
             session['is_logged_in'] = True
@@ -61,7 +61,7 @@ def login():
         else:
             return render_template('login.html', message="Email atau password salah.", user=None)
 
-    return render_template('login.html')
+    return render_template('login.html', user=None)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
