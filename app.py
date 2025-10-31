@@ -127,6 +127,12 @@ def member_register(kelas):
     cur = mysql.connection.cursor()
     if not session.get('is_logged_in'):
         return redirect(url_for('login'))
+    
+    cur.execute("SELECT * FROM members WHERE id = %s", (session.get('user_id'),))
+    member_data = cur.fetchone()
+    
+    if member_data.get(kelas.replace('-', '_')) == 1:
+        return redirect(url_for('my_courses'))
 
     class_name = kelas.replace('-', ' ').title()
 
@@ -141,22 +147,28 @@ def member_register(kelas):
         address = request.form.get('address')
         user_id = session.get('user_id')
         
+        def update_query(course):
+            cur.execute(f"UPDATE members SET {course} = %s WHERE id = %s", (1, user_id,))
+        
+        def insert_query(course):
+            cur.execute(f"INSERT INTO members (id, {course}) VALUES (%s, %s)", (user_id, 1))
+        
         if session.get('member') == 1:
             if kelas == 'python-dasar':
-                cur.execute("UPDATE members SET python_dasar = %s WHERE id = %s", (1, user_id,))
+                update_query("python_dasar")
             elif kelas == 'web-development':
-                cur.execute("UPDATE members SET web_development = %s WHERE id = %s", (1, user_id,))
+                update_query("web_development")
             elif kelas == 'data-science':
-                cur.execute("UPDATE members SET data_science = %s WHERE id = %s", (1, user_id,))
+                update_query("data_science")
             else:
                 return render_template('member-register.html', user=user, message="Kelas tidak ditemukan")
         else:
             if kelas == 'python-dasar':
-                cur.execute("INSERT INTO members (id, python_dasar) VALUES (%s, %s)", (user_id, 1))
+                insert_query("python_dasar")
             elif kelas == 'web-development':
-                cur.execute("INSERT INTO members (id, web_development) VALUES (%s, %s)", (user_id, 1))
+                insert_query("web_development")
             elif kelas == 'data-science':
-                cur.execute("INSERT INTO members (id, data_science) VALUES (%s, %s)", (user_id, 1))
+                insert_query("data_science")
             else:
                 return render_template('member-register.html', user=user, message="Kelas tidak ditemukan")
         
