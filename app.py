@@ -131,7 +131,7 @@ def member_register(kelas):
     cur.execute("SELECT * FROM members WHERE id = %s", (session.get('user_id'),))
     member_data = cur.fetchone()
     
-    if member_data.get(kelas.replace('-', '_')) == 1:
+    if member_data != None and member_data.get(kelas.replace('-', '_')) == 1:
         return redirect(url_for('my_courses'))
 
     class_name = kelas.replace('-', ' ').title()
@@ -228,6 +228,7 @@ def my_courses():
 
 @app.route('/my-courses/<course>')
 def my_course(course):
+    cur = mysql.connection.cursor()
     if not session.get('is_logged_in'):
         return redirect(url_for('index'))
     user = {
@@ -235,6 +236,13 @@ def my_course(course):
         'email': session.get('email'),
         'id': session.get('user_id')
     }
+    
+    cur.execute("SELECT * FROM members WHERE id = %s", (session.get('user_id'),))
+    member_data = cur.fetchone()
+
+    if member_data == None or member_data.get(course.replace('-', '_')) == 0:
+        return redirect(url_for('my_courses'))
+    
     if course == 'python-dasar':
         modules = [
             {
