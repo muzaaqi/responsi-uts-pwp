@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 import os
 
 load_dotenv()
@@ -9,6 +10,19 @@ load_dotenv()
 app = Flask(__name__)
 
 app.secret_key = 'HSAIJWEHRIUHIUFGF92165009DIUFGIFSFG989234R440837047IDSAFF892'
+
+# Configure file upload settings
+UPLOAD_FOLDER = os.path.join(app.static_folder, 'uploads')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2MB max file size
+
+# Create uploads directory if it doesn't exist
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))
@@ -146,6 +160,29 @@ def member_register(kelas):
         phone = request.form.get('phone')
         address = request.form.get('address')
         user_id = session.get('user_id')
+
+        # Handle payment proof upload
+        if 'payment_proof' not in request.files:
+            return render_template('member-register.html', 
+                                class_name=class_name, 
+                                user=user, 
+                                message="Bukti pembayaran wajib diunggah")
+        
+        payment_proof = request.files['payment_proof']
+        if payment_proof.filename == '':
+            return render_template('member-register.html', 
+                                class_name=class_name, 
+                                user=user, 
+                                message="Tidak ada file yang dipilih")
+        
+        if payment_proof and allowed_file(payment_proof.filename):
+            filename = secure_filename(f"{user_id}_{kelas}_{payment_proof.filename}")
+            payment_proof.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            return render_template('member-register.html', 
+                                class_name=class_name, 
+                                user=user, 
+                                message="Format file tidak didukung. Gunakan PNG, JPG, atau JPEG (Max. 2MB)")
         
         def update_query(course):
             cur.execute(f"UPDATE members SET {course} = %s WHERE id = %s", (1, user_id,))
