@@ -4,12 +4,81 @@ from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 import os
+import qrcode
+import json
+import time
+from io import BytesIO
+import base64
 
 load_dotenv()
 
 app = Flask(__name__)
 
 app.secret_key = 'HSAIJWEHRIUHIUFGF92165009DIUFGIFSFG989234R440837047IDSAFF892'
+
+# Class pricing configuration
+CLASS_PRICES = {
+    'python-dasar': 150000,
+    'web-development': 200000,
+    'data-science': 250000
+}
+
+def generate_qris_string(merchant_name, amount, transaction_id):
+    """Generate QRIS data according to QRIS standard"""
+    # Format sesuai standar QRIS
+    # Payload Format Indicator
+    qris_data = "00020101"
+    # Point of Initiation Method
+    qris_data += "0102"
+    # Merchant Account Information
+    merchant_info = (
+        "26"  # ID untuk merchant account info
+        "0015ID.MERCHANT.01"  # Merchant ID (contoh)
+        f"{len(merchant_name):02d}{merchant_name}"  # Merchant name
+    )
+    qris_data += f"{len(merchant_info):02d}{merchant_info}"
+    
+    # Currency (IDR = 360)
+    qris_data += "5303360"
+    
+    # Amount
+    amount_str = f"{amount:.2f}"
+    qris_data += f"54{len(amount_str):02d}{amount_str}"
+    
+    # Transaction ID
+    qris_data += f"62{len(transaction_id):02d}{transaction_id}"
+    
+    return qris_data
+
+def generate_qr_code(payment_data):
+    """Generate QR code with QRIS format"""
+    merchant_name = "EDUTECH COURSE"
+    amount = payment_data['price']
+    transaction_id = f"TRX{payment_data['user_id']}{int(time.time())}"
+    
+    # Generate QRIS data string
+    qris_data = generate_qris_string(merchant_name, amount, transaction_id)
+    
+    # Create QR code
+    qr = qrcode.QRCode(
+        version=None,
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(qris_data)
+    qr.make(fit=True)
+    
+    # Generate QR image
+    img = qr.make_image(fill_color="black", back_color="white")
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    
+    # Save transaction data
+    payment_data['transaction_id'] = transaction_id
+    payment_data['qris_data'] = qris_data
+    
+    return base64.b64encode(buffered.getvalue()).decode(), transaction_id
 
 # Configure file upload settings
 UPLOAD_FOLDER = os.path.join(app.static_folder, 'uploads')
@@ -220,7 +289,26 @@ def member_register(kelas):
 
         return render_template('member-register.html', class_name=class_name, user=user, message="Pendaftaran berhasil!")
 
-    return render_template('member-register.html', class_name=class_name, user=user)
+    # Get price for the selected class
+    price = CLASS_PRICES.get(kelas, 150000)  # Default to 150000 if class not found
+    
+    # Generate payment data for QR code
+    payment_data = {
+        'user_id': user['id'],
+        'class_name': class_name,
+        'price': price,
+        'email': user['email']
+    }
+    
+    # Generate QR code and get transaction ID
+    qr_code, transaction_id = generate_qr_code(payment_data)
+    
+    return render_template('member-register.html', 
+                         class_name=class_name, 
+                         user=user, 
+                         price=price,
+                         qr_code=qr_code,
+                         transaction_id=transaction_id)
 
 @app.route('/my-courses')
 def my_courses():

@@ -1,2 +1,4 @@
 flask-mysqldb==2.0.0
 python-dotenv==1.1.1
+qrcode==7.4.2
+pillow==10.0.0

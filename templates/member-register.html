@@ -65,15 +65,46 @@
           
           <!-- Barcode Image -->
           <div class="flex justify-center mb-4">
-            <img src="{{ url_for('static', filename='images/qr-code-payment.png') }}" 
+            <img src="data:image/png;base64,{{ qr_code }}"
                  alt="QR Code Payment" 
                  class="w-48 h-48 border-2 border-gray-300 rounded-lg">
           </div>
           
           <!-- Payment Instructions -->
           <div class="text-center mb-6">
-            <p class="text-gray-600 mb-2">Silakan scan QR Code di atas untuk melakukan pembayaran</p>
-            <p class="font-semibold text-gray-800">Total Pembayaran: Rp 150.000</p>
+            <p class="font-semibold text-gray-800 text-lg mb-3">Total Pembayaran: Rp {{ '{:,.0f}'.format(price) }}</p>
+            
+            <!-- Transaction Details -->
+            <div class="bg-white p-4 rounded-lg border border-gray-200 mb-4">
+              <p class="text-sm text-gray-600 mb-2">ID Transaksi: <span class="font-medium">{{ transaction_id }}</span></p>
+              <p class="text-gray-600 mb-4">Silakan scan QR Code QRIS di atas menggunakan:</p>
+              <div class="grid grid-cols-2 gap-2 text-sm mb-3">
+                <div class="bg-gray-50 p-2 rounded">
+                  <p>• DANA</p>
+                  <p>• OVO</p>
+                  <p>• GoPay</p>
+                </div>
+                <div class="bg-gray-50 p-2 rounded">
+                  <p>• ShopeePay</p>
+                  <p>• LinkAja</p>
+                  <p>• Mobile Banking</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Class Benefits -->
+            <div class="bg-primary bg-opacity-10 p-3 rounded-lg">
+              {% if class_name == 'Python Dasar' %}
+              <p class="text-sm text-primary">✨ Harga spesial untuk pemula</p>
+              <p class="text-xs text-gray-600">Akses materi selamanya</p>
+              {% elif class_name == 'Web Development' %}
+              <p class="text-sm text-primary">🌐 Termasuk domain dan hosting gratis</p>
+              <p class="text-xs text-gray-600">Nilai tambah Rp 350,000</p>
+              {% elif class_name == 'Data Science' %}
+              <p class="text-sm text-primary">📊 Termasuk dataset premium & tools analisis</p>
+              <p class="text-xs text-gray-600">Nilai tambah Rp 500,000</p>
+              {% endif %}
+            </div>
           </div>
           
           <!-- Payment Proof Upload -->
