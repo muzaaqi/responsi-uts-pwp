@@ -16,7 +16,7 @@
     <div class="mb-4 text-emerald-500 text-center font-semibold">{{ message }}</div>
     {% endif %}
 
-    <form method="POST" action="" enctype="multipart/form-data">
+    <form method="POST" action="">
       <div class="mb-4">
         <label class="block text-gray-700 mb-2">Nama Lengkap</label>
         <input
@@ -58,70 +58,6 @@
         ></textarea>
       </div>
 
-      <!-- Payment Section -->
-      <div class="mb-6">
-        <div class="bg-gray-100 p-6 rounded-lg">
-          <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Metode Pembayaran</h3>
-          
-          <!-- Barcode Image -->
-          <div class="flex justify-center mb-4">
-            <img src="data:image/png;base64,{{ qr_code }}"
-                 alt="QR Code Payment" 
-                 class="w-48 h-48 border-2 border-gray-300 rounded-lg">
-          </div>
-          
-          <!-- Payment Instructions -->
-          <div class="text-center mb-6">
-            <p class="font-semibold text-gray-800 text-lg mb-3">Total Pembayaran: Rp {{ '{:,.0f}'.format(price) }}</p>
-            
-            <!-- Transaction Details -->
-            <div class="bg-white p-4 rounded-lg border border-gray-200 mb-4">
-              <p class="text-sm text-gray-600 mb-2">ID Transaksi: <span class="font-medium">{{ transaction_id }}</span></p>
-              <p class="text-gray-600 mb-4">Silakan scan QR Code QRIS di atas menggunakan:</p>
-              <div class="grid grid-cols-2 gap-2 text-sm mb-3">
-                <div class="bg-gray-50 p-2 rounded">
-                  <p>• DANA</p>
-                  <p>• OVO</p>
-                  <p>• GoPay</p>
-                </div>
-                <div class="bg-gray-50 p-2 rounded">
-                  <p>• ShopeePay</p>
-                  <p>• LinkAja</p>
-                  <p>• Mobile Banking</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Class Benefits -->
-            <div class="bg-primary bg-opacity-10 p-3 rounded-lg">
-              {% if class_name == 'Python Dasar' %}
-              <p class="text-sm text-primary">✨ Harga spesial untuk pemula</p>
-              <p class="text-xs text-gray-600">Akses materi selamanya</p>
-              {% elif class_name == 'Web Development' %}
-              <p class="text-sm text-primary">🌐 Termasuk domain dan hosting gratis</p>
-              <p class="text-xs text-gray-600">Nilai tambah Rp 350,000</p>
-              {% elif class_name == 'Data Science' %}
-              <p class="text-sm text-primary">📊 Termasuk dataset premium & tools analisis</p>
-              <p class="text-xs text-gray-600">Nilai tambah Rp 500,000</p>
-              {% endif %}
-            </div>
-          </div>
-          
-          <!-- Payment Proof Upload -->
-          <div class="space-y-2">
-            <label class="block text-gray-700 font-medium">Upload Bukti Pembayaran</label>
-            <input
-              type="file"
-              name="payment_proof"
-              accept="image/*"
-              required
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-sm"
-            />
-            <p class="text-sm text-gray-500">Format yang diterima: JPG, JPEG, PNG (Max. 2MB)</p>
-          </div>
-        </div>
-      </div>
-
       <button
         class="w-full bg-primary text-white py-2 px-4 rounded hover:bg-primary transition duration-300 font-semibold"
       >
@@ -131,3 +67,18 @@
   </div>
 </div>
 {% endblock %}
+    </form>
+
+    <!-- Metode Pembayaran QRIS -->
+    <div class="mt-8 text-center">
+      <h3 class="text-lg font-semibold mb-2 text-gray-700">Metode Pembayaran</h3>
+        {% set harga_kelas = {
+          'Python Dasar': 'Rp150.000',
+          'Web Development': 'Rp200.000',
+          'Data Science': 'Rp250.000'
+        } %}
+        <p class="mb-2 font-semibold text-primary">Harga: {{ harga_kelas.get(class_name, '-') }}</p>
+        <p class="mb-2">Scan barcode QRIS berikut untuk melakukan pembayaran:</p>
+        <img src="/static/images/qris-barcode.png" alt="QRIS Barcode" class="mx-auto mb-2 w-48 h-48 object-contain border rounded-lg shadow" />
+        <p class="text-sm text-gray-500">Setelah melakukan pembayaran, silakan konfirmasi ke admin melalui WhatsApp.</p>
+    </div>

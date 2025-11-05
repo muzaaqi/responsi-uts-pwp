@@ -2,96 +2,13 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
 import os
-import qrcode
-import json
-import time
-from io import BytesIO
-import base64
 
 load_dotenv()
 
 app = Flask(__name__)
 
 app.secret_key = 'HSAIJWEHRIUHIUFGF92165009DIUFGIFSFG989234R440837047IDSAFF892'
-
-# Class pricing configuration
-CLASS_PRICES = {
-    'python-dasar': 150000,
-    'web-development': 200000,
-    'data-science': 250000
-}
-
-def generate_qris_string(merchant_name, amount, transaction_id):
-    """Generate QRIS data according to QRIS standard"""
-    # Format sesuai standar QRIS
-    # Payload Format Indicator
-    qris_data = "00020101"
-    # Point of Initiation Method
-    qris_data += "0102"
-    # Merchant Account Information
-    merchant_info = (
-        "26"  # ID untuk merchant account info
-        "0015ID.MERCHANT.01"  # Merchant ID (contoh)
-        f"{len(merchant_name):02d}{merchant_name}"  # Merchant name
-    )
-    qris_data += f"{len(merchant_info):02d}{merchant_info}"
-    
-    # Currency (IDR = 360)
-    qris_data += "5303360"
-    
-    # Amount
-    amount_str = f"{amount:.2f}"
-    qris_data += f"54{len(amount_str):02d}{amount_str}"
-    
-    # Transaction ID
-    qris_data += f"62{len(transaction_id):02d}{transaction_id}"
-    
-    return qris_data
-
-def generate_qr_code(payment_data):
-    """Generate QR code with QRIS format"""
-    merchant_name = "EDUTECH COURSE"
-    amount = payment_data['price']
-    transaction_id = f"TRX{payment_data['user_id']}{int(time.time())}"
-    
-    # Generate QRIS data string
-    qris_data = generate_qris_string(merchant_name, amount, transaction_id)
-    
-    # Create QR code
-    qr = qrcode.QRCode(
-        version=None,
-        error_correction=qrcode.constants.ERROR_CORRECT_M,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(qris_data)
-    qr.make(fit=True)
-    
-    # Generate QR image
-    img = qr.make_image(fill_color="black", back_color="white")
-    buffered = BytesIO()
-    img.save(buffered, format="PNG")
-    
-    # Save transaction data
-    payment_data['transaction_id'] = transaction_id
-    payment_data['qris_data'] = qris_data
-    
-    return base64.b64encode(buffered.getvalue()).decode(), transaction_id
-
-# Configure file upload settings
-UPLOAD_FOLDER = os.path.join(app.static_folder, 'uploads')
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2MB max file size
-
-# Create uploads directory if it doesn't exist
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))
@@ -229,29 +146,6 @@ def member_register(kelas):
         phone = request.form.get('phone')
         address = request.form.get('address')
         user_id = session.get('user_id')
-
-        # Handle payment proof upload
-        if 'payment_proof' not in request.files:
-            return render_template('member-register.html', 
-                                class_name=class_name, 
-                                user=user, 
-                                message="Bukti pembayaran wajib diunggah")
-        
-        payment_proof = request.files['payment_proof']
-        if payment_proof.filename == '':
-            return render_template('member-register.html', 
-                                class_name=class_name, 
-                                user=user, 
-                                message="Tidak ada file yang dipilih")
-        
-        if payment_proof and allowed_file(payment_proof.filename):
-            filename = secure_filename(f"{user_id}_{kelas}_{payment_proof.filename}")
-            payment_proof.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        else:
-            return render_template('member-register.html', 
-                                class_name=class_name, 
-                                user=user, 
-                                message="Format file tidak didukung. Gunakan PNG, JPG, atau JPEG (Max. 2MB)")
         
         def update_query(course):
             cur.execute(f"UPDATE members SET {course} = %s WHERE id = %s", (1, user_id,))
@@ -289,26 +183,7 @@ def member_register(kelas):
 
         return render_template('member-register.html', class_name=class_name, user=user, message="Pendaftaran berhasil!")
 
-    # Get price for the selected class
-    price = CLASS_PRICES.get(kelas, 150000)  # Default to 150000 if class not found
-    
-    # Generate payment data for QR code
-    payment_data = {
-        'user_id': user['id'],
-        'class_name': class_name,
-        'price': price,
-        'email': user['email']
-    }
-    
-    # Generate QR code and get transaction ID
-    qr_code, transaction_id = generate_qr_code(payment_data)
-    
-    return render_template('member-register.html', 
-                         class_name=class_name, 
-                         user=user, 
-                         price=price,
-                         qr_code=qr_code,
-                         transaction_id=transaction_id)
+    return render_template('member-register.html', class_name=class_name, user=user)
 
 @app.route('/my-courses')
 def my_courses():
